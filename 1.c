@@ -16,11 +16,15 @@ int findMatches (const char *filename, char **request, int size) {
 
 	if ((file = fopen(filename, "r")) == NULL) {
 		fprintf(stderr, "Error\n");
+		exit(EXIT_FAILURE);
 	}
 
 	while(fgets(buffer, MAXSTR, file) != NULL) {
 		buffer[strlen(buffer) - 1] = '\0'; // removing trailing new line character
 		token = strtok(buffer, " "); // tokenizing string read from the file
+
+		if (token == NULL)
+			continue;
 
 		for (int i = 0; i < size; i++) {
 			if (strcmp(request[i], token) == 0) {
@@ -31,9 +35,9 @@ int findMatches (const char *filename, char **request, int size) {
 			}
 		}
 	}
+	fclose(file);
 	return 0;
 }
-
 
 int main (int argc, char *argv[]) {
 
@@ -41,4 +45,3 @@ int main (int argc, char *argv[]) {
 
 	return 0;
 }
-
