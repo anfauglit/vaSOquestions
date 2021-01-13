@@ -11,8 +11,9 @@ int main() {
 	int b[] = {1, 2, 3, 5};
 	int c[7];
 	
+	if (scanf("%d", &n) != 1 || n <= 0 || n > 1000)
+		return 1;
 /*
-	scanf("%d", &n);
 	// input validation
 
 	for (int i = 0; i < n; i++) {
@@ -42,13 +43,10 @@ int main() {
 
 	// merging two arrays in O(n + m) time where the OP approach was O(n^2)
 	for (int i = 0; i < m + n; ++i) {
-		if ((a[k] <= b[l] && k < n) || l == m) {
-			c[i] = a[k];
-			k++;
-		} else {
-			c[i] = b[l];
-			l++;
-		}
+		if ((a[k] <= b[l] && k < n) || l == m) 
+			c[i] = a[k++];
+		else
+			c[i] = b[l++];
 	}
 /*
 	// Selection sort algoriphm done wrong. What's wrong? After you putted the minimal element at the beginning of the resulting array
@@ -76,3 +74,19 @@ int main() {
 	return 0;
 
 }
+
+// from an answer
+/*
+while (i < n && j < m) {
+	if (a[i] <= b[j])
+	c[k++] = a[i++];
+	else
+	c[k++] = b[j++];
+}
+while (i < n) {
+	c[k++] = a[i++];
+}
+while (j < m) {
+	c[k++] = a[j++];
+}
+*/
